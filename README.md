@@ -1,70 +1,60 @@
-# Deperto — Zoom by Scroll
+# Zoom by Scroll
 
-A GNOME Shell extension that lets you zoom your screen with **Super + Scroll wheel**.
+**Hold the Super/Win/Command key + scroll wheel to zoom your screen** — works the same way on all three platforms.
 
-This is a fork of [dennisguim/deperto](https://github.com/dennisguim/deperto) with two bug fixes:
-
-- **Zoom during grabs** — zoom now works when the quick settings panel, power-off dialog, or screenshot tool is open (previously blocked by Clutter stage grabs)
-- **Cursor shape during zoom** — cursor icon updates correctly while zoomed in (previously froze on whatever shape it had when zoom started)
-
----
-
-## Requirements
-
-- **Linux** with GNOME Shell 45–50
-- Tested on Fedora with GNOME on Wayland
-- Compatible with Ubuntu GNOME, Arch, and any distro running GNOME Shell 45+
-
-> **Windows / macOS?** Use the built-in zoom:
-> - **Windows**: `Win` + `+` (Windows Magnifier)
-> - **macOS**: `Cmd` + `Option` + `8` (Accessibility Zoom)
+| Platform | Shortcut | Solution |
+|----------|----------|----------|
+| 🐧 Linux (GNOME) | `Super` + Scroll | GNOME Shell extension |
+| 🪟 Windows | `Win` + Scroll | AutoHotkey v2 script |
+| 🍎 macOS | `⌘ Command` + Scroll | Built-in (just needs config) |
 
 ---
 
-## Install
+## 🐧 Linux — GNOME Shell Extension
+
+> Requires GNOME Shell 45–50 (Fedora, Ubuntu GNOME, Arch, etc.)
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/deperto-zoom.git
-cd deperto-zoom
+cd linux-gnome
 chmod +x install.sh
 ./install.sh
-```
-
-Then enable the extension:
-
-```bash
 gnome-extensions enable deperto@dennisguim.com
 ```
 
-**On Wayland** you must log out and log back in after enabling (GNOME Shell on Wayland can't hot-reload extensions mid-session).
+On Wayland, **log out and back in** after enabling (required once).
+
+**Features:**
+- Works even when quick settings panel, power-off dialog, or screenshot tool is open
+- Cursor shape updates correctly while zoomed
+- Configurable zoom step and smooth zoom (via GNOME Extensions app)
+
+→ [Full instructions](linux-gnome/)
 
 ---
 
-## Usage
+## 🪟 Windows — AutoHotkey Script
 
-| Action | Shortcut |
-|--------|----------|
-| Zoom in | `Super` + Scroll up |
-| Zoom out | `Super` + Scroll down |
-| Reset zoom | Scroll down until zoom reaches 1× |
+> Requires [AutoHotkey v2](https://www.autohotkey.com/) (free)
 
-Open **GNOME Extensions** app → Deperto settings to configure:
+1. Install AutoHotkey v2
+2. Double-click `windows/zoom-by-scroll.ahk`
 
-- **Zoom Step** — how much each scroll tick zooms (default: 0.25)
-- **Smooth Zoom** — animate zoom transitions (off by default; may lag on slow hardware)
+To run on startup: copy the `.ahk` file to `shell:startup`.
+
+→ [Full instructions](windows/)
 
 ---
 
-## Uninstall
+## 🍎 macOS — Built-in Zoom
 
-```bash
-gnome-extensions disable deperto@dennisguim.com
-rm -rf ~/.local/share/gnome-shell/extensions/deperto@dennisguim.com
-```
+No software to install.
+
+System Settings → Accessibility → Zoom → ✓ "Use scroll gesture with modifier keys" → set to ⌘ Command
+
+→ [Full instructions](macos/)
 
 ---
 
 ## Credits
 
-Original extension by [dennisguim](https://github.com/dennisguim/deperto).  
-Bug fixes added in this fork.
+Linux extension based on [dennisguim/deperto](https://github.com/dennisguim/deperto) (v11) with bug fixes for grab interception and cursor tracking.
